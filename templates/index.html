@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Alunos - Muay Thai</title>
+</head>
+<body>
+    <h1>Cadastro de Alunos</h1>
+
+    <form action="/cadastrar" method="post">
+        <input type="text" name="nome" placeholder="Nome do aluno" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Lista de Alunos</h2>
+    <ul>
+        {% for aluno in alunos %}
+            <li>
+                <strong>{{ aluno.nome }}</strong> - 
+                {% if aluno.pago %}
+    Pago ✅ | Próximo vencimento: {{ aluno.proximo_vencimento }}
+{% else %}
+    <strong style="color:red;">Vencimento: {{ aluno.proximo_vencimento }} ❌</strong> 
+    <a href="/pagar/{{ loop.index0 }}">Confirmar pagamento</a>
+{% endif %}
+
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
